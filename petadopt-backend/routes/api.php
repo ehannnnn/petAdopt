@@ -5,6 +5,9 @@ use App\Http\Controllers\FavoritController;
 use App\Http\Controllers\HewanController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Shelter\HewanController as ShelterHewanController;
+use App\Http\Controllers\Shelter\PengajuanController as ShelterPengajuanController;
+use App\Http\Controllers\Shelter\ShelterController;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +37,25 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('pengajuan', [PengajuanController::class, 'index']);
         Route::post('pengajuan', [PengajuanController::class, 'store']);
         Route::post('pengajuan/{pengajuan}/batal', [PengajuanController::class, 'batal']);
+    });
+
+    // Khusus admin/shelter (awalan URL: /api/shelter/...)
+    Route::middleware(EnsureRole::class.':admin_shelter')->prefix('shelter')->group(function () {
+        Route::get('ringkasan', [ShelterController::class, 'ringkasan']);
+        Route::get('riwayat', [ShelterController::class, 'riwayat']);
+        Route::get('profil', [ShelterController::class, 'show']);
+        Route::put('profil', [ShelterController::class, 'update']);
+
+        Route::get('hewan', [ShelterHewanController::class, 'index']);
+        Route::post('hewan', [ShelterHewanController::class, 'store']);
+        Route::get('hewan/{hewan}', [ShelterHewanController::class, 'show']);
+        Route::put('hewan/{hewan}', [ShelterHewanController::class, 'update']); // dikirim via POST + _method=PUT
+        Route::delete('hewan/{hewan}', [ShelterHewanController::class, 'destroy']);
+
+        Route::get('pengajuan', [ShelterPengajuanController::class, 'index']);
+        Route::get('pengajuan/{pengajuan}', [ShelterPengajuanController::class, 'show']);
+        Route::post('pengajuan/{pengajuan}/proses', [ShelterPengajuanController::class, 'proses']);
+        Route::post('pengajuan/{pengajuan}/setujui', [ShelterPengajuanController::class, 'setujui']);
+        Route::post('pengajuan/{pengajuan}/tolak', [ShelterPengajuanController::class, 'tolak']);
     });
 });
