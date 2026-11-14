@@ -16,6 +16,8 @@ class PengajuanAdopsi extends Model
 
     protected $casts = ['komitmen' => 'boolean', 'diputuskan_at' => 'datetime'];
 
+    public const STATUS = ['Diajukan', 'Diproses', 'Disetujui', 'Ditolak', 'Dibatalkan'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -24,5 +26,11 @@ class PengajuanAdopsi extends Model
     public function hewan(): BelongsTo
     {
         return $this->belongsTo(Hewan::class);
+    }
+
+    // Nomor tiket, contoh: REQ-2026-1113-07. Dipanggil sebagai $pengajuan->kode
+    public function getKodeAttribute(): string
+    {
+        return sprintf('REQ-%s-%02d', $this->created_at->format('Y-md'), $this->id);
     }
 }
