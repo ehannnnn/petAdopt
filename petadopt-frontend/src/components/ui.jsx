@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ApiError, fieldError } from '../api'
 import { initials } from '../utils'
 
@@ -167,6 +167,30 @@ export function Pagination({ meta, onPage, satuan = 'data' }) {
           </button>
         </nav>
       )}
+    </div>
+  )
+}
+
+// Jendela dialog di atas halaman. Ditutup dengan tombol Esc atau klik di area gelap.
+export function Modal({ open, onClose, children, width = 'max-w-md' }) {
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, onClose])
+
+  if (!open) return null
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4" onMouseDown={onClose}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        className={`max-h-[90vh] w-full ${width} overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl`}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        {children}
+      </div>
     </div>
   )
 }
