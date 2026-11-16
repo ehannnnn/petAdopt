@@ -28,3 +28,9 @@ export function waLink(telepon = '') {
   if (n.startsWith('0')) n = '62' + n.slice(1)
   return `https://wa.me/${n}`
 }
+
+// "2026-05-12T02:42:00Z" -> "12 Mei 2026"
+export function formatTanggalPanjang(iso) {
+  if (!iso) return '-'
+  return new Date(iso).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+}

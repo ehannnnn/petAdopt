@@ -194,3 +194,22 @@ export function Modal({ open, onClose, children, width = 'max-w-md' }) {
     </div>
   )
 }
+
+const GAYA_STATUS = {
+  Diajukan: 'bg-brand-100 text-brand-700',
+  Diproses: 'bg-sky-100 text-sky-700',
+  Disetujui: 'bg-emerald-100 text-emerald-700',
+  Ditolak: 'bg-red-100 text-red-700',
+  Dibatalkan: 'bg-slate-200 text-slate-600',
+}
+const IKON_STATUS = { Disetujui: 'check_circle', Ditolak: 'cancel' }
+
+// Label status pengajuan (BR-01): Diajukan, Diproses, Disetujui, Ditolak, Dibatalkan
+export function StatusBadge({ status }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${GAYA_STATUS[status] || 'bg-slate-100 text-slate-600'}`}>
+      {IKON_STATUS[status] ? <Icon name={IKON_STATUS[status]} className="!text-sm" /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
+      {status}
+    </span>
+  )
+}

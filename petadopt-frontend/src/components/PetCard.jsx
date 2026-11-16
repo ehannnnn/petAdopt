@@ -16,7 +16,7 @@ export function PetPhoto({ src, alt, className = '' }) {
 }
 
 // Kartu hewan di katalog. onFavorit tidak diberikan -> tombol hati disembunyikan (akun shelter).
-export default function PetCard({ hewan, onFavorit }) {
+export default function PetCard({ hewan, onFavorit, chip }) {
   return (
     <article className="flex flex-col rounded-[24px] bg-white p-3 shadow-[0_4px_20px_-2px_rgba(127,86,217,0.08)] ring-1 ring-slate-100 transition hover:shadow-[0_12px_28px_-4px_rgba(127,86,217,0.16)]">
       <div className="relative">
@@ -39,7 +39,7 @@ export default function PetCard({ hewan, onFavorit }) {
       <div className="flex flex-1 flex-col gap-2 px-2 pb-2 pt-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="text-lg font-bold text-slate-900">{hewan.nama}</h3>
-          <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600">{hewan.jenis_kelamin}</span>
+          <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600">{chip ?? hewan.jenis_kelamin}</span>
         </div>
         <p className="text-sm font-semibold text-brand-700">{hewan.jenis} • {formatUmur(hewan.umur_bulan)}</p>
         <p className="flex items-center gap-1 text-xs text-slate-500">
