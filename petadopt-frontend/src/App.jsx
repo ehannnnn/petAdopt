@@ -8,6 +8,7 @@ import { Beranda, KatalogPage } from './pages/Katalog'
 import HewanDetail from './pages/HewanDetail'
 import FormPengajuan from './pages/FormPengajuan'
 import DashboardAdopter from './pages/DashboardAdopter'
+import ProfilSaya from './pages/ProfilSaya'
 
 // Halaman sementara, akan diganti di tahap berikutnya
 function Sementara({ judul }) {
@@ -47,7 +48,7 @@ export default function App() {
         <Route path="/hewan/:id" element={<HewanDetail />} />
         <Route path="/hewan/:id/ajukan" element={<RequireRole role="adopter"><FormPengajuan /></RequireRole>} />
         <Route path="/dashboard" element={<RequireRole role="adopter"><DashboardAdopter /></RequireRole>} />
-        <Route path="/profil" element={<RequireRole role="adopter"><Sementara judul="Profil Saya" /></RequireRole>} />
+        <Route path="/profil" element={<RequireRole role="adopter"><ProfilSaya /></RequireRole>} />
         <Route path="/shelter" element={<RequireRole role="admin_shelter"><Sementara judul="Dashboard Shelter" /></RequireRole>} />
         <Route path="*" element={<Sementara judul="Halaman belum tersedia" />} />
       </Route>

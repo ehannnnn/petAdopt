@@ -88,8 +88,9 @@ export function InputIcon({ icon, children }) {
   )
 }
 
-// variant="auth": bentuk pil dengan ikon di kiri (halaman autentikasi); tanpa variant: isian biasa
-export function PasswordInput({ variant, icon = 'lock', ...props }) {
+// variant="auth": bentuk pil dengan ikon di kiri (halaman autentikasi).
+// Tanpa variant: isian biasa; gayanya bisa diganti lewat className.
+export function PasswordInput({ variant, icon = 'lock', className, ...props }) {
   const [show, setShow] = useState(false)
   const auth = variant === 'auth'
   return (
@@ -99,7 +100,7 @@ export function PasswordInput({ variant, icon = 'lock', ...props }) {
           <Icon name={icon} className="!text-xl" />
         </span>
       )}
-      <input {...props} type={show ? 'text' : 'password'} className={auth ? 'input-auth pr-12' : 'input pr-12'} />
+      <input {...props} type={show ? 'text' : 'password'} className={auth ? 'input-auth pr-12' : `${className ?? 'input'} pr-12`} />
       <button
         type="button"
         onClick={() => setShow((s) => !s)}
