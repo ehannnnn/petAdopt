@@ -9,6 +9,7 @@ import HewanDetail from './pages/HewanDetail'
 import FormPengajuan from './pages/FormPengajuan'
 import DashboardAdopter from './pages/DashboardAdopter'
 import ProfilSaya from './pages/ProfilSaya'
+import Panduan from './pages/Panduan'
 
 // Halaman sementara, akan diganti di tahap berikutnya
 function Sementara({ judul }) {
@@ -45,6 +46,7 @@ export default function App() {
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Beranda />} />
         <Route path="/katalog" element={<KatalogPage />} />
+        <Route path="/panduan" element={<Panduan />} />
         <Route path="/hewan/:id" element={<HewanDetail />} />
         <Route path="/hewan/:id/ajukan" element={<RequireRole role="adopter"><FormPengajuan /></RequireRole>} />
         <Route path="/dashboard" element={<RequireRole role="adopter"><DashboardAdopter /></RequireRole>} />
